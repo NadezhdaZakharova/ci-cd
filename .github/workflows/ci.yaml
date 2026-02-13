@@ -32,3 +32,6 @@ jobs:
       
       - name: Linting With Ruff
         run: ruff check .
+      
+      - name: Linting with black
+        run: black .
