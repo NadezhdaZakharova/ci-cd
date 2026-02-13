@@ -24,7 +24,11 @@ jobs:
           pip install --upgrade pip
           pip install fastapi pydantic uvicorn
           pip install pytest httpx
+          pip install ruff black
       # --- Проверки ---
       - run: python -m py_compile main.py
       - run: python -c "import main; print('imported OK')"
       - run: pytest test_main.py
+      
+      - name: Linting With Ruff
+        run: ruff check .
