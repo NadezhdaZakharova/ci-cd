@@ -4,7 +4,7 @@ from fastapi import FastAPI, HTTPException, Query
 from pydantic import BaseModel
 from pathlib import Path
 
-class Product(BaseModel):
+class Product(BaseModel)
     name: str
     price: float
     description: str
