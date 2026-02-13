@@ -26,3 +26,4 @@ jobs:
       # --- Проверки ---
       - run: python -m py_compile main.py
       - run: python -c "import main; print('imported OK')"
+      - run: pytest test_main.py
