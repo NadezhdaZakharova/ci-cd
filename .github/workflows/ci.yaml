@@ -22,7 +22,7 @@ jobs:
           POSTGRES_PASSWORD: app
           POSTGRES_DB: eshop
         ports:
-          - 5432:5432
+          - 5433:5432
         options: >-
           --health-cmd "pg_isready -U app -d eshop"
           --health-interval 5s
@@ -31,7 +31,7 @@ jobs:
 
     env:
       DB_HOST: 127.0.0.1
-      DB_PORT: 5432
+      DB_PORT: 5433
       DB_USER: app
       DB_PASSWORD: app
       DB_NAME: eshop
