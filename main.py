@@ -11,7 +11,7 @@ app = FastAPI(title="E-Shop-СI-CD-1.0.1")
 
 DB_CONFIG = {
     "host": os.getenv("DB_HOST", "localhost"),
-    "port": int(os.getenv("DB_PORT", "5433")),
+    "port": int(os.getenv("DB_PORT", "5432")),
     "user": os.getenv("DB_USER", "app"),
     "password": os.getenv("DB_PASSWORD", "app"),
     "dbname": os.getenv("DB_NAME", "eshop"),
