@@ -12,7 +12,7 @@ class Product(BaseModel):
     created_at: str
 
 
-app = FastAPI(title="E-Shop-СI-CD")
+app = FastAPI(title="E-Shop-СI-CD-1.0.1")
 
 with open(Path(__file__).parent / "shop.json", "r", encoding="utf-8") as f:
     PRODUCTS = json.load(f)
