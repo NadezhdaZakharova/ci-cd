@@ -20,6 +20,7 @@ with open(Path(__file__).parent / "shop.json", "r", encoding="utf-8") as f:
 CART = []
 ORDERS = []
 
+
 @app.get("/products")
 async def get_products():
     return PRODUCTS
@@ -37,10 +38,11 @@ async def health():
     # аннотация
     return {"status": "ok", "products": len(PRODUCTS)}
 
+
 @app.get("/search")
 async def search(q: str = Query(..., min_length=1)):
     """Поиск товаров по подстроке в названии (q). Регистр не учитывается."""
-    return [p for p in PRODUCTS if q.lower() in p ["name"].lower()]
+    return [p for p in PRODUCTS if q.lower() in p["name"].lower()]
 
 
 @app.post("/cart/add")
@@ -72,7 +74,12 @@ async def checkout():
     if not CART:
         raise HTTPException(status_code=400)
     total = sum(item["price"] for item in CART)
-    order = {"id": len(ORDERS), "items": CART.copy(), "total": total, "created_at": datetime.now().isoformat()}
+    order = {
+        "id": len(ORDERS),
+        "items": CART.copy(),
+        "total": total,
+        "created_at": datetime.now().isoformat(),
+    }
     ORDERS.append(order)
     CART.clear()
     return order

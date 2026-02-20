@@ -6,9 +6,7 @@ from datetime import datetime
 import psycopg
 from psycopg.rows import dict_row
 
-
 app = FastAPI(title="E-Shop-СI-CD-1.0.1")
-
 
 
 DB_CONFIG = {
@@ -19,15 +17,19 @@ DB_CONFIG = {
     "dbname": os.getenv("DB_NAME", "eshop"),
 }
 
+
 def get_db_connection():
     return psycopg.connect(**DB_CONFIG, row_factory=dict_row)
+
 
 @app.get("/products")
 async def get_products():
     conn = get_db_connection()
     try:
         with conn.cursor() as cur:
-            cur.execute("SELECT id, name, price, description, created_at FROM video_cards ORDER BY id")
+            cur.execute(
+                "SELECT id, name, price, description, created_at FROM video_cards ORDER BY id"
+            )
             return [{**dict(r), "price": float(r["price"])} for r in cur.fetchall()]
     finally:
         conn.close()
@@ -43,4 +45,3 @@ async def health():
             return {"status": "ok", "products": count}
     finally:
         conn.close()
-

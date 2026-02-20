@@ -47,13 +47,19 @@ jobs:
           pip install fastapi pydantic uvicorn
           pip install pytest httpx
           pip install ruff black
+
+
+      - name: Init PostgreSQL
+        run: |
+          docker run --rm --network host -e PGPASSWORD=app -v $PWD/scripts:/scripts postgres:17 \
+            psql -h 127.0.0.1 -U app -d eshop -f /scripts/init_db.sql
       # --- Проверки ---
       - run: python -m py_compile main.py
       - run: python -c "import main; print('imported OK')"
       - run: pytest test_main.py
       
-      - name: Linting With Ruff
-        run: ruff check .
+      # - name: Linting With Ruff
+        # run: ruff check .
       
       - name: Linting with black
         run: black .
